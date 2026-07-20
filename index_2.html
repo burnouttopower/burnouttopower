@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burnout to Power — Helen Nguyen</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --wine:   #460808;
+  --rose:   #9D4751;
+  --taupe:  #E2E0D7;
+  --tmid:   #C8C5B9;
+  --tdeep:  #D4D1C6;
+  --tlight: #EEECE7;
+  --cream:  #FAFAF8;
+  --warm:   #F5F3EE;
+  --grey:   #7A6A6A;
+  --white:  #FFFFFF;
+  --sans:   'Montserrat', system-ui, sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream);
+  color:var(--wine);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:var(--cream);
+  border-bottom:1px solid var(--tmid);
+  padding:0 24px;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px
+}
+.nav-brand{
+  font-size:10px;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--wine);white-space:nowrap;flex-shrink:0
+}
+.nav-links{display:flex;gap:20px;align-items:center;flex-shrink:0}
+.nav-links a{
+  font-size:9px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--grey);text-decoration:none
+}
+.nav-links a:hover{color:var(--wine)}
+.nav-cta{
+  font-size:9px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--wine);text-decoration:none;
+  border:1px solid var(--rose);padding:8px 14px;
+  white-space:nowrap;flex-shrink:0
+}
+.nav-cta:hover{background:var(--rose);color:var(--white)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 48px 80px;
+  max-width:860px;margin:0 auto
+}
+.hero-kicker{
+  font-size:8px;font-weight:700;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:20px;
+  display:flex;align-items:center;gap:14px
+}
+.hero-kicker::after{
+  content:'';flex:1;max-width:60px;
+  height:1px;background:var(--rose)
+}
+.hero-headline{
+  font-family:'Times New Roman',serif;
+  font-size:clamp(36px,6vw,64px);
+  font-weight:400;line-height:1.15;
+  color:var(--wine);margin-bottom:28px
+}
+.hero-headline em{font-style:italic;color:var(--rose)}
+.hero-body{
+  font-size:15px;font-weight:300;
+  color:var(--wine);line-height:1.85;
+  max-width:580px;margin-bottom:40px
+}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.btn-primary{
+  display:inline-block;
+  background:var(--wine);color:var(--taupe);
+  font-size:9px;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  text-decoration:none;padding:16px 36px;
+  border:1px solid var(--wine)
+}
+.btn-primary:hover{background:var(--rose);border-color:var(--rose)}
+.btn-secondary{
+  display:inline-block;
+  background:transparent;color:var(--wine);
+  font-size:9px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  text-decoration:none;padding:16px 24px;
+  border-bottom:1px solid var(--tmid)
+}
+.btn-secondary:hover{color:var(--rose);border-color:var(--rose)}
+.hero-rule{
+  width:48px;height:1px;
+  background:var(--rose);margin-top:60px
+}
+
+/* ── QUIZ SECTION ── */
+.quiz-section{
+  background:var(--warm);
+  padding:80px 0;
+}
+.quiz-inner{
+  max-width:860px;margin:0 auto;padding:0 48px
+}
+.quiz-wrapper{
+  background:var(--cream);
+  padding:40px;
+  border:1px solid var(--tmid)
+}
+.quiz-screen{display:none}
+.quiz-screen.active{display:block}
+
+.quiz-kicker{
+  font-size:8px;font-weight:700;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:14px;display:flex;align-items:center;gap:10px
+}
+.quiz-kicker::after{
+  content:'';flex:1;max-width:40px;
+  height:1px;background:var(--rose)
+}
+
+.quiz-headline{
+  font-family:'Times New Roman',serif;
+  font-size:28px;font-weight:400;line-height:1.25;
+  color:var(--wine);margin-bottom:12px
+}
+
+.quiz-subtitle{
+  font-size:13.5px;font-weight:300;
+  color:var(--wine);line-height:1.75;
+  margin-bottom:28px;max-width:480px
+}
+
+.quiz-counter{
+  font-size:11px;font-weight:500;
+  color:var(--grey);letter-spacing:0.08em;
+  margin-bottom:20px
+}
+
+.quiz-question{
+  font-family:'Times New Roman',serif;
+  font-size:22px;font-weight:400;
+  color:var(--wine);line-height:1.3;
+  text-align:center;margin-bottom:32px
+}
+
+.quiz-options{
+  display:flex;flex-direction:column;gap:8px
+}
+
+.quiz-option{
+  padding:14px 16px;
+  font-size:13px;font-weight:400;
+  color:var(--wine);
+  background:var(--cream);
+  border:1px solid var(--tdeep);
+  cursor:pointer;
+  transition:all 0.2s
+}
+
+.quiz-option:hover{
+  border-color:var(--rose);
+  background:var(--warm)
+}
+
+.quiz-email-input{
+  width:100%;
+  padding:12px 14px;
+  font-size:13px;
+  color:var(--wine);
+  background:var(--cream);
+  border:1px solid var(--tdeep);
+  font-family:var(--sans);
+  margin-bottom:14px
+}
+
+.quiz-email-input:focus{
+  outline:none;border-color:var(--rose)
+}
+
+.quiz-button{
+  display:block;
+  width:100%;
+  padding:14px;
+  font-size:9px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  background:var(--wine);color:var(--taupe);
+  border:1px solid var(--wine);
+  cursor:pointer;
+  transition:all 0.2s
+}
+
+.quiz-button:hover{
+  background:var(--rose);border-color:var(--rose)
+}
+
+.quiz-hint{
+  font-size:11px;color:var(--grey);
+  text-align:center;margin-top:12px
+}
+
+.quiz-loading{
+  text-align:center;padding:40px 0
+}
+
+.quiz-loading p{
+  font-size:15px;margin-bottom:8px
+}
+
+.quiz-results{
+  display:flex;flex-direction:column;gap:24px
+}
+
+.quiz-result-item{
+  border-top:1px solid var(--tdeep);padding-top:20px
+}
+
+.quiz-result-item:first-child{
+  border-top:none;padding-top:0
+}
+
+.quiz-pattern-label{
+  font-size:8px;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:6px;display:block
+}
+
+.quiz-pattern-name{
+  font-size:14px;font-weight:600;
+  color:var(--wine);margin-bottom:10px;letter-spacing:0.04em
+}
+
+.quiz-pattern-desc{
+  font-size:13px;font-weight:300;
+  color:var(--wine);line-height:1.75
+}
+
+.quiz-next-steps{
+  margin-top:32px;padding-top:24px;
+  border-top:1px solid var(--tdeep)
+}
+
+.quiz-next-steps h3{
+  font-family:'Times New Roman',serif;
+  font-size:18px;font-weight:400;
+  color:var(--wine);margin-bottom:18px
+}
+
+.quiz-step{
+  display:flex;gap:14px;margin-bottom:16px
+}
+
+.quiz-step-num{
+  width:28px;height:28px;
+  border:1px solid var(--rose);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;
+  color:var(--rose);
+  flex-shrink:0
+}
+
+.quiz-step-text h4{
+  font-size:12px;font-weight:600;
+  color:var(--wine);margin-bottom:4px;letter-spacing:0.04em
+}
+
+.quiz-step-text p{
+  font-size:12px;font-weight:300;
+  color:var(--wine);line-height:1.65;margin:0
+}
+
+.progress-bar{
+  position:fixed;top:56px;left:0;right:0;
+  height:2px;background:var(--tlight);
+  z-index:99;display:none
+}
+
+.progress-bar.active{display:block}
+
+.progress-fill{
+  height:100%;background:var(--rose);
+  width:0%;transition:width 0.3s ease
+}
+
+/* ── SECTION WRAPPER ── */
+section{padding:80px 48px;max-width:860px;margin:0 auto}
+.section-full{padding:80px 0;background:var(--warm)}
+.section-full-inner{max-width:860px;margin:0 auto;padding:0 48px}
+
+/* ── SECTION LABELS ── */
+.s-label{
+  font-size:8px;font-weight:700;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:14px;display:block
+}
+.s-rule{
+  width:40px;height:1px;
+  background:var(--rose);margin-bottom:24px
+}
+h2{
+  font-family:'Times New Roman',serif;
+  font-size:clamp(26px,4vw,40px);
+  font-weight:400;line-height:1.2;
+  color:var(--wine);margin-bottom:20px
+}
+h3{
+  font-size:13px;font-weight:700;
+  letter-spacing:0.04em;color:var(--wine);
+  margin-bottom:6px
+}
+p{
+  font-size:13.5px;font-weight:300;
+  color:var(--wine);line-height:1.85;margin-bottom:16px
+}
+p:last-child{margin-bottom:0}
+p em{font-style:italic;color:var(--grey)}
+
+/* ── DIVIDER ── */
+hr{border:none;border-top:1px solid var(--tmid);margin:60px 0}
+
+/* ── THE OFFER BOX ── */
+.offer-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--tmid);
+  margin:32px 0;border:1px solid var(--tmid)
+}
+.offer-cell{
+  background:var(--cream);padding:28px 24px
+}
+.offer-cell-label{
+  font-size:8px;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:8px;display:block
+}
+.offer-cell-value{
+  font-family:'Times New Roman',serif;
+  font-size:28px;font-weight:400;color:var(--wine);
+  line-height:1.2;margin-bottom:4px
+}
+.offer-cell-sub{
+  font-size:12px;color:var(--grey);font-weight:300
+}
+
+/* ── PHASES ── */
+.phases{display:flex;flex-direction:column;gap:1px;margin:24px 0}
+.phase{
+  display:grid;grid-template-columns:100px 1fr;
+  gap:0;border-top:1px solid var(--tdeep)
+}
+.phase:last-child{border-bottom:1px solid var(--tdeep)}
+.phase-label{
+  padding:20px 20px 20px 0;
+  border-right:1px solid var(--tdeep)
+}
+.phase-num{
+  font-size:8px;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--rose);display:block;margin-bottom:4px
+}
+.phase-name{
+  font-size:12px;font-weight:600;
+  color:var(--wine);letter-spacing:0.04em
+}
+.phase-weeks{
+  font-size:11px;color:var(--grey);
+  font-weight:300
+}
+.phase-desc{
+  padding:20px;font-size:13px;font-weight:300;
+  color:var(--wine);line-height:1.75
+}
+
+/* ── INCLUDES ── */
+.includes{
+  list-style:none;margin:0;
+  display:flex;flex-direction:column;gap:12px
+}
+.includes li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:13px;font-weight:300;color:var(--wine);line-height:1.65
+}
+.includes-dot{
+  width:4px;height:4px;
+  background:var(--rose);border-radius:50%;
+  margin-top:6px;flex-shrink:0
+}
+
+/* ── PULL QUOTE ── */
+.pull-quote{
+  margin:48px 0;padding:32px;
+  background:var(--tlight);border-left:4px solid var(--rose)
+}
+.pull-quote p{
+  font-family:'Times New Roman',serif;
+  font-size:16px;font-weight:400;
+  font-style:italic;margin:0;color:var(--wine);line-height:1.6
+}
+
+/* ── PRICING ── */
+.pricing-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:1px;background:var(--tmid);
+  margin:32px 0;border:1px solid var(--tmid)
+}
+.price-box,.price-founding{
+  background:var(--cream);padding:28px 20px
+}
+.price-founding{
+  display:flex;flex-direction:column;justify-content:space-between
+}
+.price-founding-text{
+  font-size:12px;font-weight:300;
+  color:var(--wine);line-height:1.7;margin-bottom:28px
+}
+.price-founding-amount{
+  font-family:'Times New Roman',serif;
+  font-size:24px;font-weight:400;color:var(--wine);line-height:1.2
+}
+.price-box-top{
+  display:flex;flex-direction:column
+}
+.price-label{
+  font-size:8px;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:8px;display:block
+}
+.price-amount{
+  font-family:'Times New Roman',serif;
+  font-size:24px;font-weight:400;color:var(--wine);
+  line-height:1.2;margin-bottom:2px
+}
+.price-aud{
+  font-size:12px;color:var(--grey);
+  font-weight:300;margin-bottom:8px
+}
+.price-note{
+  font-size:10px;color:var(--rose);
+  font-weight:600;letter-spacing:0.08em
+}
+.currency-note{
+  font-size:11px;color:var(--grey);
+  font-weight:300;margin-top:16px
+}
+
+/* ── ABOUT ── */
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;margin:32px 0
+}
+.credential-list{
+  list-style:none;margin:0;
+  display:flex;flex-direction:column;gap:18px
+}
+.credential-item{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:13px;font-weight:300;color:var(--wine);line-height:1.65
+}
+.credential-dot{
+  width:4px;height:4px;
+  background:var(--rose);border-radius:50%;
+  margin-top:6px;flex-shrink:0
+}
+
+/* ── BOOKING SECTION ── */
+.booking-section{
+  background:var(--cream)
+}
+.booking-inner{
+  max-width:860px;margin:0 auto;padding:80px 48px
+}
+.calendly-inline-widget{
+  margin-top:40px
+}
+
+/* ── AUDIT SECTION ── */
+.audit-section{
+  background:var(--warm)
+}
+.audit-inner{
+  max-width:480px;margin:0 auto;padding:80px 48px
+}
+.audit-section .s-label{text-align:center;margin-bottom:14px}
+.audit-section .s-rule{margin:0 auto 24px}
+.audit-section h2{text-align:center}
+.audit-section p{text-align:center}
+.audit-form{
+  display:flex;flex-direction:column;gap:12px;
+  margin:28px 0
+}
+.audit-form input{
+  padding:12px 14px;
+  font-size:13px;color:var(--wine);
+  background:var(--cream);border:1px solid var(--tdeep);
+  font-family:var(--sans)
+}
+.audit-form input:focus{
+  outline:none;border-color:var(--rose)
+}
+.audit-form button{
+  display:block;width:100%;
+  padding:14px;
+  font-size:9px;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  background:var(--wine);color:var(--taupe);
+  border:1px solid var(--wine);cursor:pointer;
+  transition:all 0.2s
+}
+.audit-form button:hover{
+  background:var(--rose);border-color:var(--rose)
+}
+.audit-disclaimer{
+  text-align:center;font-size:11px;
+  color:var(--grey);margin-bottom:0
+}
+.audit-section a{
+  color:var(--rose);text-decoration:none
+}
+.audit-section a:hover{
+  color:var(--wine)
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--cream);
+  border-top:1px solid var(--tmid);
+  padding:48px;
+  text-align:center;font-size:11px;color:var(--grey);
+  font-weight:300
+}
+.footer-inner{max-width:860px;margin:0 auto}
+.footer-brand{
+  font-size:9px;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--wine);display:block;margin-bottom:14px
+}
+.footer-links{
+  display:flex;justify-content:center;gap:20px;
+  flex-wrap:wrap;margin-bottom:18px
+}
+.footer-links a{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--grey);text-decoration:none
+}
+.footer-links a:hover{color:var(--wine)}
+.footer-copy{
+  font-size:10px;line-height:1.6;
+  color:var(--grey);margin:0
+}
+
+@media(max-width:768px){
+  nav{padding:0 16px}
+  .hero{padding:100px 24px 60px}
+  .hero-kicker::after{max-width:40px}
+  section,.section-full-inner,.quiz-inner{padding:60px 24px}
+  .booking-inner,.audit-inner{padding:60px 24px}
+  .about-grid{grid-template-columns:1fr;gap:32px}
+  .pricing-grid{grid-template-columns:1fr}
+  .phase{grid-template-columns:80px 1fr}
+  .offer-grid{grid-template-columns:1fr}
+  .quiz-option{font-size:12px}
+  footer{padding:32px 24px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PROGRESS BAR (hidden until quiz starts) -->
+<div class="progress-bar" id="progressBar">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">Burnout to Power</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#programme">Programme</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#booking" class="nav-cta">Book a Call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-kicker">1:1 Private Coaching for Women in Business</span>
+  <h1 class="hero-headline">Soft is not the opposite<br>of <em>ambitious.</em></h1>
+  <p class="hero-body">You have been building for years. You are good at what you do. And something is quietly not working. I help burnt-out, high-achieving women rebuild their business and their life — on their own terms. Not softer. Not smaller. Truer.</p>
+  <div class="hero-actions">
+    <a href="#booking" class="btn-primary">Book a Free Discovery Call</a>
+    <a href="#quiz" class="btn-secondary">Take the Energy Wasters Quiz →</a>
+  </div>
+  <div class="hero-rule"></div>
+</div>
+
+<!-- QUIZ SECTION -->
+<div class="quiz-section" id="quiz">
+  <div class="quiz-inner">
+    <div class="quiz-wrapper">
+      
+      <!-- Email Entry Screen -->
+      <div id="emailScreen" class="quiz-screen active">
+        <span class="quiz-kicker">Free Assessment</span>
+        <h2 class="quiz-headline">Which personality trait is draining your energy</h2>
+        <p class="quiz-subtitle">16 honest questions to uncover the real pattern behind your burnout. By the end, you'll understand your exact pattern, how it's costing you, and what you can do about it.</p>
+        
+        <form id="emailForm">
+          <input type="email" id="email" class="quiz-email-input" placeholder="Your email address" required>
+          <button type="submit" class="quiz-button">Start Quiz</button>
+        </form>
+        <p class="quiz-hint">Takes about 3 minutes. No judgment.</p>
+      </div>
+
+      <!-- Quiz Questions Screen -->
+      <div id="quizScreen" class="quiz-screen">
+        <div class="quiz-counter">Question <span id="questionNumber">1</span> of 16</div>
+        <div class="quiz-question" id="questionText"></div>
+        <div class="quiz-options" id="ratingButtons"></div>
+      </div>
+
+      <!-- Loading Screen -->
+      <div id="loadingScreen" class="quiz-screen">
+        <div class="quiz-loading">
+          <p>Processing your results</p>
+          <p style="font-size:12px;color:var(--grey)">Just a moment...</p>
+        </div>
+      </div>
+
+      <!-- Results Screen -->
+      <div id="resultsScreen" class="quiz-screen">
+        <span class="quiz-kicker">Your Results</span>
+        <h2 style="margin-bottom:28px">Here's what showed up strongest</h2>
+        
+        <div class="quiz-results">
+          <div class="quiz-result-item">
+            <span class="quiz-pattern-label">Primary Pattern</span>
+            <h3 class="quiz-pattern-name" id="primaryPatternTitle"></h3>
+            <p class="quiz-pattern-desc" id="primaryPatternDesc"></p>
+          </div>
+
+          <div class="quiz-result-item">
+            <span class="quiz-pattern-label">Secondary Pattern</span>
+            <h3 class="quiz-pattern-name" id="secondaryPatternTitle"></h3>
+            <p class="quiz-pattern-desc" id="secondaryPatternDesc"></p>
+          </div>
+        </div>
+
+        <div class="quiz-next-steps">
+          <p style="font-size:13px;margin-bottom:20px">Your full personalised breakdown with specific insights, the cost of each pattern, and what to do about it is on its way to <strong id="resultEmail"></strong>.</p>
+          
+          <h3 style="font-family:'Times New Roman',serif;font-size:18px;font-weight:400;margin-bottom:18px">What happens next</h3>
+          
+          <div class="quiz-step">
+            <div class="quiz-step-num">1</div>
+            <div class="quiz-step-text">
+              <h4>Check your email right now</h4>
+              <p>Your personalised breakdown is on its way. Look for an email from helen@burnouttopower.com (check spam if needed).</p>
+            </div>
+          </div>
+
+          <div class="quiz-step">
+            <div class="quiz-step-num">2</div>
+            <div class="quiz-step-text">
+              <h4>Read your breakdown this week</h4>
+              <p>Take time to sit with it. It's going to feel accurate. You might recognise yourself in places that surprise you. That's normal.</p>
+            </div>
+          </div>
+
+          <div class="quiz-step">
+            <div class="quiz-step-num">3</div>
+            <div class="quiz-step-text">
+              <h4>Book a conversation if it resonates</h4>
+              <p>If you read your breakdown and think "she gets it", there's a link to book a 30-minute conversation. No pressure.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <span class="s-label">My Road</span>
+  <div class="s-rule"></div>
+  <div class="about-grid">
+    <div>
+      <h2>I have been where you are</h2>
+      <p>I opened my salon at 21 with no education, no mentor, and no map. It nearly cost me every soft thing in me.</p>
+      <p>Fifteen years in the beauty industry. I founded a salon in London, scaled it to a team of eight, and did everything the ambitious woman is supposed to do — first in, last out, always available, running on caffeine and the fear of dropping a single plate.</p>
+      <p>From the outside it was a success story. From the inside, I was The Machine, The Ghost, and The Firefighter on rotation. Then I burnt out completely — in the way that only happens when you have been holding everything together alone for years.</p>
+      <p>I invested £85,000 into a supplement brand and lost most of it. I moved to Sydney and rebuilt deliberately. What I teach now, I learned by living it — not by studying it.</p>
+      <p>The Power Reset is the method I built doing it — the one I wish someone had handed me at the salon, at midnight, doing payroll for the third time that week.</p>
+      <p><em>I'm not ahead of you. I'm just further down the same road.</em></p>
+    </div>
+    <div>
+      <ul class="credential-list">
+        <li class="credential-item"><span class="credential-dot"></span>15 years in business — salon, property, supplements, coaching</li>
+        <li class="credential-item"><span class="credential-dot"></span>Opened a salon at 21 — scaled to 8 staff, with 6 figure gross revenue</li>
+        <li class="credential-item"><span class="credential-dot"></span>Sold at a premium</li>
+        <li class="credential-item"><span class="credential-dot"></span>Residential property London + 2 BTL Birmingham + land Vietnam</li>
+        <li class="credential-item"><span class="credential-dot"></span>Invested £85,000 in a supplements brand — and rebuilt from the loss</li>
+        <li class="credential-item"><span class="credential-dot"></span>Moved to Sydney — by choice, by design</li>
+        <li class="credential-item"><span class="credential-dot"></span>28 years of London — business network built across beauty, property, and entrepreneurship</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMME -->
+<div class="section-full" id="programme">
+  <div class="section-full-inner">
+    <span class="s-label">The Programme</span>
+    <div class="s-rule"></div>
+    <h2>Burnout to Power<br>90-Day Private Coaching</h2>
+    <p style="max-width:520px;margin-bottom:32px">Three months. Fully held. Built around who you are — not a template. We go inward before we go outward. The internal work makes everything else possible.</p>
+
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-label">
+          <span class="phase-num">Phase 1</span>
+          <span class="phase-name">Reset</span>
+          <span class="phase-weeks">Weeks 1–4</span>
+        </div>
+        <div class="phase-desc">Identity audit. Burnout mapping. Values clarification. Vision and life design. The inner foundation that makes everything else possible. We do not touch the business until this is solid.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-label">
+          <span class="phase-num">Phase 2</span>
+          <span class="phase-name">Rebuild</span>
+          <span class="phase-weeks">Weeks 5–8</span>
+        </div>
+        <div class="phase-desc">Business model clarity. Revenue stack design. Pricing from power — your real number, said out loud and held. Systems and structure. Content and visibility strategy.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-label">
+          <span class="phase-num">Phase 3</span>
+          <span class="phase-name">Rise</span>
+          <span class="phase-weeks">Weeks 9–12</span>
+        </div>
+        <div class="phase-desc">Launch strategy. Discovery call coaching. Boundary design. 12-month roadmap built together in the final session. The exit is a beginning.</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:40px;margin-bottom:12px">What is included</h3>
+    <ul class="includes">
+      <li><span class="includes-dot"></span>Business Audit Session — 90 minutes before Session 1</li>
+      <li><span class="includes-dot"></span>6 × 60-minute 1:1 coaching sessions via Zoom, fortnightly</li>
+      <li><span class="includes-dot"></span>Voxer and WhatsApp support Monday to Friday throughout 90 days</li>
+      <li><span class="includes-dot"></span>The Power Reset Workbook — your full 90-day coaching companion</li>
+      <li><span class="includes-dot"></span>Resource Vault — 8 tools including Energy Audit, Offer Builder, AI Prompt Library</li>
+      <li><span class="includes-dot"></span>One Bonus 30-minute Clarity Call — use any time</li>
+      <li><span class="includes-dot"></span>12-Month Exit Roadmap — built together in your final session</li>
+    </ul>
+
+    <div class="pull-quote">
+      <p>"Ninety days from now there is a Sunday you do not have to recover from."</p>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section id="pricing">
+  <span class="s-label">The Investment</span>
+  <div class="s-rule"></div>
+  <h2>Priced in the open.</h2>
+  <p style="max-width:500px">Because you are tired of "book a call to find out." All prices in GBP. AUD equivalents shown. Payment plans available on all tiers.</p>
+
+  <div class="pricing-grid" style="margin-top:32px">
+    <div class="price-founding">
+      <div class="price-founding-text">
+        <strong>Founding Client Rate — 5 places only.</strong> In exchange for something honest: your feedback as we go, and a testimonial at the end if — and only if — the work earns one.
+      </div>
+      <div class="price-founding-amount">£3,000 <span style="font-size:14px;opacity:0.7">≈ A$5,850</span></div>
+    </div>
+    <div class="price-box">
+      <div class="price-box-top">
+        <span class="price-label">Pay in Full</span>
+        <div class="price-amount">£3,500</div>
+        <div class="price-aud">≈ A$6,825</div>
+        <div class="price-note">Best value</div>
+      </div>
+    </div>
+    <div class="price-box">
+      <div class="price-box-top">
+        <span class="price-label">2 Payments</span>
+        <div class="price-amount">£1,950</div>
+        <div class="price-aud">≈ A$3,800 each</div>
+        <div class="price-note">Start + Day 45</div>
+      </div>
+    </div>
+    <div class="price-box">
+      <div class="price-box-top">
+        <span class="price-label">3 Payments</span>
+        <div class="price-amount">£1,250</div>
+        <div class="price-aud">≈ A$2,440 each</div>
+        <div class="price-note">Monthly for 3 months</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="currency-note">* AUD equivalents are approximate at current exchange rates. All invoices issued in GBP. Currency conversions may vary.</p>
+
+  <div style="margin-top:40px;padding:24px;background:var(--warm);border-top:1px solid var(--tmid)">
+    <p style="font-size:13px;margin-bottom:0"><strong>A boundary, stated up front:</strong> voice-note support runs Monday to Friday. Weekends are offline — for you and for me. It is the whole point.</p>
+  </div>
+</section>
+
+<!-- BOOKING — CALENDLY INLINE -->
+<div class="booking-section" id="booking">
+  <div class="booking-inner">
+    <span class="s-label">Book a Founding Client Call</span>
+    <div class="s-rule"></div>
+    <h2>The call is a conversation,<br>not a pitch.</h2>
+    <p style="max-width:480px;margin-bottom:40px">If it is not right, I will tell you. If it is, I will tell you that too. 30 minutes. Choose a time below.</p>
+
+    <!-- CALENDLY INLINE WIDGET -->
+    <div
+      class="calendly-inline-widget"
+      data-url="https://calendly.com/htd-nguyen/45min?hide_gdpr_banner=1&background_color=F5F3EE&text_color=460808&primary_color=9D4751"
+    ></div>
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  </div>
+</div>
+
+<!-- SURVIVAL MODE SCORECARD SIGNUP -->
+<div class="audit-section" id="audit">
+  <div class="audit-inner">
+    <span class="s-label" style="text-align:center;display:block">Free — Two Minutes</span>
+    <div class="s-rule" style="margin:0 auto 24px"></div>
+    <h2>The Survival Mode Scorecard</h2>
+    <p>Find out how deep in survival mode you're running — and where your energy is actually going. Free, straight to your inbox.</p>
+
+    <!-- Mailchimp signup form -->
+    <form
+      action="https://us15.list-manage.com/subscribe/post?u=a230eba653b01218f97d17c2e&amp;id=3b487996dc"
+      method="post"
+      target="_blank"
+      class="audit-form"
+    >
+      <input type="hidden" name="tags" value="2306382">
+      <input type="text" name="FNAME" placeholder="First name" required>
+      <input type="email" name="EMAIL" placeholder="Email address" required>
+      <!-- Mailchimp anti-bot field — do not remove -->
+      <div style="position:absolute;left:-5000px" aria-hidden="true">
+        <input type="text" name="b_a230eba653b01218f97d17c2e_3b487996dc" tabindex="-1" value="">
+      </div>
+      <button type="submit">Send Me the Scorecard</button>
+    </form>
+
+    <p class="audit-disclaimer">No spam. No daily emails. Unsubscribe whenever you like.</p>
+
+    <p style="margin-top:24px;font-size:12px;color:var(--grey)">
+      Or <a href="https://mcusercontent.com/a230eba653b01218f97d17c2e/files/1d3de640-3713-a427-0413-2d2f711aa7f3/The_Burnt_Out_to_Balanced_Business_Audit.pdf" style="color:var(--rose);font-weight:500;text-decoration:none;border-bottom:1px solid var(--tdeep)" target="_blank">download it directly here →</a>
+    </p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">Burnout to Power</span>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#programme">Programme</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#booking">Book a Call</a>
+      <a href="https://instagram.com/_htdn" target="_blank">@_htdn</a>
+      <a href="mailto:htd.nguyen@hotmail.com">Email Helen</a>
+    </div>
+    <p class="footer-copy">
+      Helen Nguyen &nbsp;·&nbsp; Burnout to Power &nbsp;·&nbsp; htd.nguyen@hotmail.com &nbsp;·&nbsp; Sydney, Australia<br>
+      © 2025 Burnout to Power. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<!-- QUIZ JAVASCRIPT -->
+<script>
+const questions = [
+  { text: "You finish a project and immediately notice three things you'd change. You can't celebrate it until those are fixed.", type: "perfectionist" },
+  { text: "You submit work to a client, then spend the next week thinking of small optimisations you could have made.", type: "perfectionist" },
+  { text: "You try to take a weekend off, but there's a nagging guilt that you should be working or optimising something.", type: "perfectionist" },
+  { text: "You notice a tiny detail in something you submitted yesterday. You immediately panic and want to fix it, even though nobody else noticed.", type: "perfectionist" },
+  { text: "When someone asks for your help, you feel a hit of purpose and importance. When you're not helping someone, you feel a bit lost.", type: "giver" },
+  { text: "You're already overwhelmed, but when someone asks for a favour, you can't say no. Saying no feels selfish or mean.", type: "giver" },
+  { text: "You spend an evening listening to a friend's problems for two hours. You never mention your own struggles — it doesn't feel natural to.", type: "giver" },
+  { text: "You cancel your own plans regularly to be there for people. It's just what you do. Your needs feel less important.", type: "giver" },
+  { text: "You got promoted or achieved something impressive but think: 'They'll figure out I'm not actually qualified for this.'", type: "prover" },
+  { text: "You accomplish something impressive, but the achievement feels hollow immediately. You're already thinking about the next goal.", type: "prover" },
+  { text: "When someone praises your work, it feels like oxygen. Without recognition, you doubt your abilities and feel like a fraud.", type: "prover" },
+  { text: "You avoid taking on new challenges or projects unless you're 100% sure you'll be excellent at them. Failure feels too risky.", type: "prover" },
+  { text: "People think you have it all together, but internally you feel like you're watching your own life from outside it.", type: "numb" },
+  { text: "You achieve something impressive and it lands flat. The response feels muted, even though it should feel good.", type: "numb" },
+  { text: "You're productive and getting things done, but there's a flatness underneath. Like you're on autopilot.", type: "numb" },
+  { text: "Sex, food, conversations — nothing really lights you up anymore. It all feels a bit muted, like the volume is turned down.", type: "numb" }
+];
+
+const patterns = {
+  perfectionist: { name: "the relentless perfectionist", desc: "Your worth is tied to flawless output. Rest feels irresponsible. You notice what could be improved and struggle to declare anything complete. The bar keeps rising, and failure — even tiny imperfections — feels like a threat to who you are." },
+  giver: { name: "the infinite giver", desc: "Your identity is wrapped up in being needed. Boundaries dissolve. You feel most valued when solving someone else's problem, and saying no feels selfish. When you're not indispensable, you feel lost. Your self-abandonment is so normalised it looks like generosity." },
+  prover: { name: "the constant prove-er", desc: "Imposter syndrome masquerading as ambition. Despite everything you've achieved, you're convinced you'll be found out. External validation is oxygen — praise, promotion, recognition. Without it, you feel fraudulent. The finish line keeps moving." },
+  numb: { name: "the numb achiever", desc: "You're crushing it on paper. Productive, capable, 'have it together'. But internally? Flat. Empty. You go through the motions without feeling present. Success feels hollow because you're not actually there to experience it. The volume on joy has been turned all the way down." }
+};
+
+const ratingLabels = [
+  { value: 1, label: "Not me" },
+  { value: 2, label: "Rarely" },
+  { value: 3, label: "Sometimes" },
+  { value: 4, label: "Often" },
+  { value: 5, label: "That's totally me" }
+];
+
+let currentQuestion = 0;
+let email = '';
+let scores = { perfectionist: 0, giver: 0, prover: 0, numb: 0 };
+
+const emailForm = document.getElementById('emailForm');
+const emailInput = document.getElementById('email');
+const questionText = document.getElementById('questionText');
+const ratingButtons = document.getElementById('ratingButtons');
+const progressFill = document.getElementById('progressFill');
+const progressBar = document.getElementById('progressBar');
+
+emailForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  email = emailInput.value;
+  progressBar.classList.add('active');
+  showScreen('quizScreen');
+  showQuestion();
+});
+
+function showQuestion() {
+  const question = questions[currentQuestion];
+  questionText.textContent = question.text;
+  document.getElementById('questionNumber').textContent = currentQuestion + 1;
+  progressFill.style.width = ((currentQuestion + 1) / questions.length) * 100 + '%';
+
+  ratingButtons.innerHTML = '';
+  ratingLabels.forEach(rating => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'quiz-option';
+    btn.textContent = rating.label;
+    btn.addEventListener('click', () => recordAnswer(rating.value));
+    ratingButtons.appendChild(btn);
+  });
+}
+
+function recordAnswer(value) {
+  const questionType = questions[currentQuestion].type;
+  scores[questionType] += value;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    submitResults();
+  }
+}
+
+function submitResults() {
+  showScreen('loadingScreen');
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const primaryPattern = sorted[0][0];
+  const secondaryPattern = sorted[1][0];
+
+  submitToMailchimp(email, primaryPattern, secondaryPattern);
+}
+
+function submitToMailchimp(emailAddress, primary, secondary) {
+  fetch('/.netlify/functions/mailchimp-subscribe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: emailAddress, pattern: primary })
+  })
+  .then(response => response.json())
+  .then(data => {
+    setTimeout(() => {
+      showResults(primary, secondary, emailAddress);
+    }, 500);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    setTimeout(() => {
+      showResults(primary, secondary, emailAddress);
+    }, 500);
+  });
+}
+
+function showResults(primary, secondary, emailAddress) {
+  document.getElementById('primaryPatternTitle').textContent = patterns[primary].name;
+  document.getElementById('primaryPatternDesc').textContent = patterns[primary].desc;
+  document.getElementById('secondaryPatternTitle').textContent = patterns[secondary].name;
+  document.getElementById('secondaryPatternDesc').textContent = patterns[secondary].desc;
+  document.getElementById('resultEmail').textContent = emailAddress;
+
+  showScreen('resultsScreen');
+}
+
+function showScreen(screenId) {
+  document.querySelectorAll('.quiz-screen').forEach(screen => {
+    screen.classList.remove('active');
+  });
+  document.getElementById(screenId).classList.add('active');
+}
+</script>
+
+</body>
+</html>
